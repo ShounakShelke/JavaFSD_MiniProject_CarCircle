@@ -14,7 +14,7 @@ export const Navbar = ({ onLoginClick }: NavbarProps) => {
   const navItems = [
     { label: "Home", href: "/" },
     { label: "Cars", href: "/cars" },
-    { label: "Pricing", href: "/pricing" },
+    { label: "Sell", href: "/sell" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ];

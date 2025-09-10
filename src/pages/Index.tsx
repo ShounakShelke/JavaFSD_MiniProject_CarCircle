@@ -106,8 +106,8 @@ const Index = () => {
       >
         <HeroSection onGetStartedClick={handleLogin} />
         
-        {/* Features Section */}
-        <section id="features" className="py-20 bg-muted/30">
+        {/* Car Search Section */}
+        <section className="py-20 bg-muted/30">
           <div className="container mx-auto px-4">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -117,50 +117,114 @@ const Index = () => {
               className="text-center mb-16"
             >
               <h2 className="text-4xl font-montserrat font-bold text-foreground mb-4">
-                Why Choose CarCircle?
+                Find Your Perfect Car
               </h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Experience the future of car rental management with our comprehensive platform
+                Search from thousands of cars available for rent or purchase
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Search Form */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="max-w-4xl mx-auto bg-card p-8 rounded-2xl shadow-lg mb-12"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Location</label>
+                  <select className="w-full p-3 border rounded-lg bg-background">
+                    <option>Select City</option>
+                    <option>Mumbai</option>
+                    <option>Delhi</option>
+                    <option>Bangalore</option>
+                    <option>Chennai</option>
+                    <option>Pune</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Car Type</label>
+                  <select className="w-full p-3 border rounded-lg bg-background">
+                    <option>Any Type</option>
+                    <option>Hatchback</option>
+                    <option>Sedan</option>
+                    <option>SUV</option>
+                    <option>Luxury</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Budget Range</label>
+                  <select className="w-full p-3 border rounded-lg bg-background">
+                    <option>Any Budget</option>
+                    <option>Under ₹2,000/day</option>
+                    <option>₹2,000 - ₹5,000/day</option>
+                    <option>Above ₹5,000/day</option>
+                  </select>
+                </div>
+                <div className="flex items-end">
+                  <button className="w-full p-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+                    Search Cars
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Featured Cars */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  title: "Smart Booking",
-                  description: "AI-powered recommendations and instant booking",
-                  color: "customer"
+                  name: "Maruti Swift",
+                  image: "/placeholder.svg",
+                  price: "₹2,500/day",
+                  location: "Mumbai",
+                  rating: 4.5,
+                  type: "Hatchback"
                 },
                 {
-                  title: "Fleet Management",
-                  description: "Comprehensive tools for fleet owners",
-                  color: "vendor"
+                  name: "Honda City",
+                  image: "/placeholder.svg", 
+                  price: "₹3,200/day",
+                  location: "Delhi",
+                  rating: 4.7,
+                  type: "Sedan"
                 },
                 {
-                  title: "Maintenance Tracking",
-                  description: "Streamlined service and maintenance workflows",
-                  color: "mechanic"
-                },
-                {
-                  title: "Advanced Analytics",
-                  description: "Real-time insights and reporting",
-                  color: "admin"
+                  name: "Hyundai Creta",
+                  image: "/placeholder.svg",
+                  price: "₹4,800/day", 
+                  location: "Bangalore",
+                  rating: 4.6,
+                  type: "SUV"
                 }
-              ].map((feature, index) => (
+              ].map((car, index) => (
                 <motion.div
-                  key={feature.title}
+                  key={car.name}
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                   whileHover={{ y: -10 }}
-                  className="bg-card p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  <div className={`w-12 h-12 rounded-full bg-${feature.color}/10 flex items-center justify-center mb-4`}>
-                    <div className={`w-6 h-6 rounded-full bg-${feature.color}`}></div>
+                  <img src={car.image} alt={car.name} className="w-full h-48 object-cover" />
+                  <div className="p-6">
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="text-xl font-semibold">{car.name}</h3>
+                      <span className="text-primary font-bold">{car.price}</span>
+                    </div>
+                    <p className="text-muted-foreground mb-3">{car.type} • {car.location}</p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1">
+                        <span className="text-yellow-500">★</span>
+                        <span className="text-sm">{car.rating}</span>
+                      </div>
+                      <button className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm">
+                        View Details
+                      </button>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-montserrat font-semibold mb-3">{feature.title}</h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
                 </motion.div>
               ))}
             </div>

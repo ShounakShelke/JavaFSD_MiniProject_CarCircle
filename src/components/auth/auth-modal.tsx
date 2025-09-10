@@ -22,29 +22,25 @@ const roleConfig = {
     icon: Car,
     title: "Customer",
     description: "Book and manage your car rentals",
-    color: "customer",
-    features: ["Browse cars", "Book rentals", "Track bookings", "Reviews & ratings"]
+    color: "customer"
   },
   vendor: {
     icon: Users,
-    title: "Fleet Owner",
+    title: "Manager",
     description: "Manage your vehicle fleet",
-    color: "vendor", 
-    features: ["Fleet management", "Booking analytics", "Revenue tracking", "Customer communication"]
+    color: "vendor"
   },
   mechanic: {
     icon: Wrench,
     title: "Mechanic",
     description: "Handle vehicle maintenance",
-    color: "mechanic",
-    features: ["Maintenance schedules", "Service reports", "Vehicle status", "Job tracking"]
+    color: "mechanic"
   },
   admin: {
     icon: Shield,
     title: "Admin",
     description: "System administration",
-    color: "admin",
-    features: ["User management", "System monitoring", "Analytics", "Audit logs"]
+    color: "admin"
   }
 };
 
@@ -112,19 +108,9 @@ export const AuthModal = ({ isOpen, onClose, onRoleSelect }: AuthModalProps) => 
                         <div className={`mx-auto w-16 h-16 rounded-full bg-${config.color}/10 flex items-center justify-center mb-2`}>
                           <IconComponent className={`h-8 w-8 text-${config.color}`} />
                         </div>
-                        <CardTitle className="text-xl font-montserrat">{config.title}</CardTitle>
+                <CardTitle className="text-xl font-montserrat">{config.title}</CardTitle>
                         <CardDescription>{config.description}</CardDescription>
                       </CardHeader>
-                      <CardContent>
-                        <ul className="space-y-2">
-                          {config.features.map((feature, index) => (
-                            <li key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <div className={`w-2 h-2 rounded-full bg-${config.color}`} />
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
-                      </CardContent>
                     </Card>
                   </motion.div>
                 );

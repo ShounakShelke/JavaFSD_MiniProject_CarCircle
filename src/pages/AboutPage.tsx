@@ -37,38 +37,25 @@ const AboutPage = () => {
 
   const team = [
     {
-      name: "Rajesh Kumar",
-      role: "CEO & Founder",
+      name: "Shounak Shelke",
+      role: "Co-Founder",
       image: "/placeholder.svg",
-      description: "Visionary leader with 15+ years in automotive industry"
+      description: "Co-founder of CarCircle"
     },
     {
-      name: "Priya Sharma",
-      role: "CTO",
+      name: "Sahil Kanchan",
+      role: "Co-Founder",
       image: "/placeholder.svg", 
-      description: "Tech expert driving our digital transformation"
+      description: "Co-founder of CarCircle"
     },
     {
-      name: "Amit Patel",
-      role: "Head of Operations",
+      name: "Shivam Bhosle",
+      role: "Co-Founder",
       image: "/placeholder.svg",
-      description: "Ensures smooth operations across all locations"
-    },
-    {
-      name: "Neha Singh",
-      role: "Head of Customer Success",
-      image: "/placeholder.svg",
-      description: "Champions customer experience and satisfaction"
+      description: "Co-founder of CarCircle"
     }
   ];
 
-  const milestones = [
-    { year: "2016", event: "CarCircle founded with 50 cars in Mumbai" },
-    { year: "2018", event: "Expanded to 5 cities with 1,000+ vehicles" },
-    { year: "2020", event: "Launched mobile app and contactless rentals" },
-    { year: "2022", event: "Reached 25+ cities and 10,000+ cars" },
-    { year: "2024", event: "Introduced electric vehicle fleet and AI booking" }
-  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -174,47 +161,6 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Timeline */}
-      <motion.section
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="py-20 bg-muted/30"
-      >
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-montserrat font-bold mb-4">Our Journey</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              From a small startup to India's leading car rental platform
-            </p>
-          </div>
-          
-          <div className="max-w-4xl mx-auto">
-            {milestones.map((milestone, index) => (
-              <motion.div
-                key={milestone.year}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className={`flex items-center gap-8 mb-12 ${
-                  index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-                }`}
-              >
-                <div className="flex-1">
-                  <Card className="p-6">
-                    <h3 className="text-2xl font-bold text-primary mb-2">{milestone.year}</h3>
-                    <p className="text-muted-foreground">{milestone.event}</p>
-                  </Card>
-                </div>
-                <div className="w-4 h-4 bg-primary rounded-full flex-shrink-0"></div>
-                <div className="flex-1"></div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
 
       {/* Team Section */}
       <section className="py-20">
@@ -226,7 +172,7 @@ const AboutPage = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {team.map((member, index) => (
               <motion.div
                 key={member.name}

@@ -11,7 +11,7 @@ const ContactPage = () => {
     {
       icon: Phone,
       title: "Phone Support",
-      details: "+91 1800-123-4567",
+      details: "+91 98765 43210",
       description: "Available 24/7 for emergencies",
       color: "customer"
     },
@@ -25,7 +25,7 @@ const ContactPage = () => {
     {
       icon: MapPin,
       title: "Head Office",
-      details: "Mumbai, Maharashtra",
+      details: "KJSSE, SVU, Vidyavihar, Mumbai",
       description: "Visit us for partnerships",
       color: "admin"
     },
@@ -41,27 +41,9 @@ const ContactPage = () => {
   const offices = [
     {
       city: "Mumbai",
-      address: "CarCircle HQ, Bandra Kurla Complex, Mumbai - 400051",
-      phone: "+91 22-4567-8900",
+      address: "KJSSE, SVU, Vidyavihar, Mumbai - 400077",
+      phone: "+91 98765 43210",
       email: "mumbai@carcircle.com"
-    },
-    {
-      city: "Delhi",
-      address: "Connaught Place, Central Delhi - 110001",
-      phone: "+91 11-4567-8900", 
-      email: "delhi@carcircle.com"
-    },
-    {
-      city: "Bangalore",
-      address: "Koramangala, Bangalore - 560034",
-      phone: "+91 80-4567-8900",
-      email: "bangalore@carcircle.com"
-    },
-    {
-      city: "Pune",
-      address: "Hinjewadi IT Park, Pune - 411057",
-      phone: "+91 20-4567-8900",
-      email: "pune@carcircle.com"
     }
   ];
 
@@ -275,7 +257,7 @@ const ContactPage = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 gap-8 max-w-md mx-auto">
             {offices.map((office, index) => (
               <motion.div
                 key={office.city}
