@@ -37,10 +37,27 @@ const ProfilePage = () => {
     avatar: "/placeholder.svg"
   });
 
-  const stats = [
+  // Dynamic stats based on user role (this would come from context/state in real app)
+  const userRole = "customer"; // This would be determined from authentication context
+  const stats = userRole === "customer" ? [
     { label: "Bookings", value: "15", icon: Car },
     { label: "Rating", value: "4.8", icon: Star },
     { label: "Reviews", value: "12", icon: Trophy },
+    { label: "Verified", value: "Yes", icon: Shield }
+  ] : userRole === "manager" ? [
+    { label: "Fleet Size", value: "24", icon: Car },
+    { label: "Revenue", value: "₹1.85L", icon: Trophy },
+    { label: "Rating", value: "4.8", icon: Star },
+    { label: "Verified", value: "Yes", icon: Shield }
+  ] : userRole === "mechanic" ? [
+    { label: "Jobs Done", value: "156", icon: Car },
+    { label: "Rating", value: "4.9", icon: Star },
+    { label: "Experience", value: "3 yrs", icon: Trophy },
+    { label: "Verified", value: "Yes", icon: Shield }
+  ] : [
+    { label: "Users", value: "2,847", icon: Car },
+    { label: "Reports", value: "89", icon: Trophy },
+    { label: "Uptime", value: "99.9%", icon: Star },
     { label: "Verified", value: "Yes", icon: Shield }
   ];
 

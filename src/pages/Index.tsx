@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/ui/navbar";
 import { HeroSection } from "@/components/landing/hero-section";
-import { AuthModal } from "@/components/auth/auth-modal";
+import { AuthModal } from "@/components/auth/auth-modal.js";
 import { CustomerDashboard } from "./dashboards/CustomerDashboard";
-import { VendorDashboard } from "./dashboards/VendorDashboard";
+import { ManagerDashboard } from "./dashboards/ManagerDashboard";
 import { MechanicDashboard } from "./dashboards/MechanicDashboard";
 import { AdminDashboard } from "./dashboards/AdminDashboard";
 import { useToast } from "@/hooks/use-toast";
@@ -52,8 +52,8 @@ const Index = () => {
     switch (currentUser) {
       case "customer":
         return <CustomerDashboard />;
-      case "vendor":
-        return <VendorDashboard />;
+      case "manager":
+        return <ManagerDashboard />;
       case "mechanic":
         return <MechanicDashboard />;
       case "admin":

@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Shield, Users, BarChart3, AlertCircle, Settings, Activity } from "lucide-react";
+import { Shield, Users, BarChart3, AlertCircle, Activity } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import UserManagementPopup from "@/components/UserManagementPopup";
+import SecurityPopup from "@/components/SecurityPopup";
 
 export const AdminDashboard = () => {
+  const [showUserManagementPopup, setShowUserManagementPopup] = useState(false);
+  const [showSecurityPopup, setShowSecurityPopup] = useState(false);
   const stats = [
     { label: "Total Users", value: "2,847", icon: Users, color: "admin", trend: "+12% this month" },
     { label: "Active Rentals", value: "156", icon: Activity, color: "admin", trend: "85% capacity" },
@@ -61,10 +66,6 @@ export const AdminDashboard = () => {
             </p>
           </div>
           <div className="flex gap-3">
-            <Button variant="outline">
-              <Settings className="h-4 w-4 mr-2" />
-              System Settings
-            </Button>
             <Button className="bg-admin hover:bg-admin/90">
               <Shield className="h-4 w-4 mr-2" />
               Security Center
@@ -232,14 +233,14 @@ export const AdminDashboard = () => {
           transition={{ delay: 0.5 }}
           className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8"
         >
-          <Card className="hover:shadow-lg transition-all cursor-pointer">
+          <Card className="hover:shadow-lg transition-all cursor-pointer" onClick={() => setShowUserManagementPopup(true)}>
             <CardContent className="p-6 text-center">
               <Users className="h-8 w-8 text-admin mx-auto mb-3" />
               <h3 className="font-semibold mb-2">User Management</h3>
               <p className="text-sm text-muted-foreground">Manage all platform users</p>
             </CardContent>
           </Card>
-          
+
           <Card className="hover:shadow-lg transition-all cursor-pointer">
             <CardContent className="p-6 text-center">
               <BarChart3 className="h-8 w-8 text-admin mx-auto mb-3" />
@@ -247,24 +248,27 @@ export const AdminDashboard = () => {
               <p className="text-sm text-muted-foreground">Platform performance data</p>
             </CardContent>
           </Card>
-          
-          <Card className="hover:shadow-lg transition-all cursor-pointer">
+
+          <Card className="hover:shadow-lg transition-all cursor-pointer" onClick={() => setShowSecurityPopup(true)}>
             <CardContent className="p-6 text-center">
               <Shield className="h-8 w-8 text-admin mx-auto mb-3" />
               <h3 className="font-semibold mb-2">Security</h3>
               <p className="text-sm text-muted-foreground">Security & compliance</p>
             </CardContent>
           </Card>
-          
-          <Card className="hover:shadow-lg transition-all cursor-pointer">
-            <CardContent className="p-6 text-center">
-              <Settings className="h-8 w-8 text-admin mx-auto mb-3" />
-              <h3 className="font-semibold mb-2">Settings</h3>
-              <p className="text-sm text-muted-foreground">System configuration</p>
-            </CardContent>
-          </Card>
+
+
         </motion.div>
       </div>
+
+      {/* Popups */}
+      {showUserManagementPopup && (
+        <UserManagementPopup onClose={() => setShowUserManagementPopup(false)} />
+      )}
+      {showSecurityPopup && (
+        <SecurityPopup onClose={() => setShowSecurityPopup(false)} />
+      )}
+
     </div>
   );
 };

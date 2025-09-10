@@ -1,14 +1,17 @@
 import { motion } from "framer-motion";
-import { Car, Calendar, CreditCard, Star, MessageSquare, Award } from "lucide-react";
+import { Car, Calendar, MessageSquare, Award } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
+
 export const CustomerDashboard = () => {
+
+
   const stats = [
     { label: "Active Rentals", value: "2", icon: Car, color: "customer" },
     { label: "Completed Trips", value: "15", icon: Calendar, color: "customer" },
-    { label: "Total Spent", value: "₹45,000", icon: CreditCard, color: "customer" },
+    // Removed Total Spent as payment methods are to be removed
     { label: "Loyalty Points", value: "1,250", icon: Award, color: "secondary" },
   ];
 
@@ -30,6 +33,8 @@ export const CustomerDashboard = () => {
       location: "Pune Airport"
     }
   ];
+
+
 
   return (
     <div className="min-h-screen bg-background theme-customer">
@@ -129,16 +134,7 @@ export const CustomerDashboard = () => {
                           {rental.pickup} to {rental.return} • {rental.location}
                         </p>
                       </div>
-                      <div className="flex gap-2">
-                        <Button variant="outline" size="sm">
-                          View Details
-                        </Button>
-                        {rental.status === "Active" && (
-                          <Button variant="default" size="sm" className="bg-customer hover:bg-customer/90">
-                            Track Car
-                          </Button>
-                        )}
-                      </div>
+
                     </div>
                   </motion.div>
                 ))}
@@ -158,22 +154,6 @@ export const CustomerDashboard = () => {
                 <CardTitle className="text-lg">Quick Actions</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Button className="w-full justify-start bg-customer hover:bg-customer/90">
-                  <Car className="h-4 w-4 mr-2" />
-                  Book New Car
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <Calendar className="h-4 w-4 mr-2" />
-                  View History
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <CreditCard className="h-4 w-4 mr-2" />
-                  Payment Methods
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <Star className="h-4 w-4 mr-2" />
-                  Write Review
-                </Button>
                 <Button variant="outline" className="w-full justify-start">
                   <MessageSquare className="h-4 w-4 mr-2" />
                   Support Chat
@@ -207,6 +187,8 @@ export const CustomerDashboard = () => {
           </motion.div>
         </div>
       </div>
+
+
     </div>
   );
 };

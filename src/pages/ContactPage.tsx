@@ -41,7 +41,7 @@ const ContactPage = () => {
   const offices = [
     {
       city: "Mumbai",
-      address: "KJSSE, SVU, Vidyavihar, Mumbai - 400077",
+      address: "KJSSE, SVU, Vidyavihar, Mumbai",
       phone: "+91 98765 43210",
       email: "mumbai@carcircle.com"
     }

@@ -1,0 +1,28 @@
+{
+  "name": "car-booking-app",
+  "version": "1.0.0",
+  "description": "A car booking application that allows users to search, book, and sell cars.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "keywords": [
+    "car",
+    "booking",
+    "application"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
+    "react-query": "^3.34.0"
+  },
+  "devDependencies": {
+    "react-scripts": "4.0.3"
+  }
+}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Car, Filter, MapPin, Calendar, Fuel, Users, Star, Heart, ShoppingCart } from "lucide-react";
+import { Car, Filter, MapPin, Star, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,7 +10,6 @@ const CarsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("rent");
   const [filters, setFilters] = useState({
     category: "all",
-    priceRange: "all",
     location: "all"
   });
 
@@ -20,8 +19,6 @@ const CarsPage = () => {
       name: "BMW X5",
       category: "luxury",
       type: "SUV",
-      price: 8500,
-      originalPrice: 45000000,
       rating: 4.8,
       reviews: 124,
       image: "/placeholder.svg",
@@ -39,8 +36,6 @@ const CarsPage = () => {
       name: "Honda City",
       category: "sedan",
       type: "Sedan",
-      price: 2500,
-      originalPrice: 1200000,
       rating: 4.6,
       reviews: 89,
       image: "/placeholder.svg",
@@ -58,8 +53,6 @@ const CarsPage = () => {
       name: "Maruti Swift",
       category: "compact",
       type: "Hatchback",
-      price: 1800,
-      originalPrice: 800000,
       rating: 4.4,
       reviews: 156,
       image: "/placeholder.svg",
@@ -77,8 +70,6 @@ const CarsPage = () => {
       name: "Mahindra Thar",
       category: "adventure",
       type: "SUV",
-      price: 4500,
-      originalPrice: 1500000,
       rating: 4.7,
       reviews: 78,
       image: "/placeholder.svg",
@@ -95,7 +86,7 @@ const CarsPage = () => {
 
   const categories = [
     { id: "rent", label: "For Rent", icon: Car },
-    { id: "buy", label: "For Sale", icon: ShoppingCart },
+    { id: "buy", label: "For Sale", icon: Car },
     { id: "sell", label: "Sell Your Car", icon: Heart }
   ];
 
@@ -194,17 +185,6 @@ const CarsPage = () => {
               <option value="Bangalore">Bangalore</option>
               <option value="Goa">Goa</option>
             </select>
-
-            <select
-              value={filters.priceRange}
-              onChange={(e) => setFilters({...filters, priceRange: e.target.value})}
-              className="px-4 py-2 rounded-lg border border-input bg-background"
-            >
-              <option value="all">All Prices</option>
-              <option value="budget">Under ₹3,000/day</option>
-              <option value="mid">₹3,000 - ₹6,000/day</option>
-              <option value="premium">Above ₹6,000/day</option>
-            </select>
           </div>
         </div>
       </motion.section>
@@ -292,20 +272,8 @@ const CarsPage = () => {
                           </div>
                         )}
                         
-                        <div className="flex justify-between items-center pt-4 border-t border-border">
-                          <div>
-                            <p className="text-2xl font-bold text-primary">
-                              ₹{selectedCategory === "buy" 
-                                ? car.originalPrice.toLocaleString() 
-                                : `${car.price}/day`}
-                            </p>
-                            {selectedCategory === "rent" && (
-                              <p className="text-xs text-muted-foreground">Plus taxes</p>
-                            )}
-                          </div>
-                          <Button 
-                            className={selectedCategory === "buy" ? "bg-green-600 hover:bg-green-700" : ""}
-                          >
+                        <div className="flex justify-end items-center pt-4 border-t border-border">
+                          <Button>
                             {selectedCategory === "buy" ? "Buy Now" : "Book Now"}
                           </Button>
                         </div>

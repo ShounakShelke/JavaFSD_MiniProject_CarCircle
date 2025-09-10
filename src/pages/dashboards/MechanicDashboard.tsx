@@ -1,11 +1,35 @@
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Wrench, Calendar, CheckCircle, AlertTriangle, FileText, Clock } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import AssignmentPopup from "@/components/MechanicAssignmentPopup";
+import ServiceReportPopup from "@/components/ServiceReportPopup";
+import JobTrackerPopup from "@/components/JobTrackerPopup";
+import AlertPopup from "@/components/AlertPopup";
 
 export const MechanicDashboard = () => {
+  const [showAssignmentPopup, setShowAssignmentPopup] = useState(false);
+  const [showServiceReportPopup, setShowServiceReportPopup] = useState(false);
+  const [showJobTrackerPopup, setShowJobTrackerPopup] = useState(false);
+  const [showAlertPopup, setShowAlertPopup] = useState(false);
+  const [workStarted, setWorkStarted] = useState(false);
+  const [timer, setTimer] = useState(0);
+
+  useEffect(() => {
+    let interval;
+    if (workStarted) {
+      interval = setInterval(() => {
+        setTimer((prev) => prev + 1);
+      }, 1000);
+    } else if (!workStarted && timer !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [workStarted, timer]);
+
   const stats = [
     { label: "Assigned Vehicles", value: "12", icon: Wrench, color: "mechanic" },
     { label: "Pending Jobs", value: "5", icon: Clock, color: "orange-500" },
@@ -57,11 +81,13 @@ export const MechanicDashboard = () => {
             </p>
           </div>
           <div className="flex gap-3">
-            <Button variant="outline">
+          <Button variant="outline" onClick={() => setShowServiceReportPopup(true)}>
               <FileText className="h-4 w-4 mr-2" />
               Upload Report
             </Button>
-            <Button className="bg-mechanic hover:bg-mechanic/90">
+            <Button className="bg-mechanic hover:bg-mechanic/90" onClick={() => {
+              alert("Marked as complete");
+            }}>
               <CheckCircle className="h-4 w-4 mr-2" />
               Mark Complete
             </Button>
@@ -144,13 +170,18 @@ export const MechanicDashboard = () => {
                       <span className="text-red-600 font-medium">Due: {job.deadline}</span>
                     </div>
                     <div className="flex gap-2 mt-3">
-                      <Button size="sm" className="bg-mechanic hover:bg-mechanic/90">
+                      <Button size="sm" className="bg-mechanic hover:bg-mechanic/90" onClick={() => setWorkStarted(true)}>
                         Start Work
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" onClick={() => alert("Car details: " + job.vehicle)}>
                         View Details
                       </Button>
                     </div>
+                    {workStarted && (
+                      <div className="mt-2 text-sm text-mechanic font-medium">
+                        Timer: {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}
+                      </div>
+                    )}
                   </motion.div>
                 ))}
               </CardContent>
@@ -226,31 +257,31 @@ export const MechanicDashboard = () => {
           transition={{ delay: 0.5 }}
           className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8"
         >
-          <Card className="hover:shadow-lg transition-all cursor-pointer">
+          <Card className="hover:shadow-lg transition-all cursor-pointer" onClick={() => setShowAssignmentPopup(true)}>
             <CardContent className="p-6 text-center">
               <Wrench className="h-8 w-8 text-mechanic mx-auto mb-3" />
               <h3 className="font-semibold mb-2">All Assignments</h3>
               <p className="text-sm text-muted-foreground">View assigned vehicles</p>
             </CardContent>
           </Card>
-          
-          <Card className="hover:shadow-lg transition-all cursor-pointer">
+
+          <Card className="hover:shadow-lg transition-all cursor-pointer" onClick={() => setShowServiceReportPopup(true)}>
             <CardContent className="p-6 text-center">
               <FileText className="h-8 w-8 text-mechanic mx-auto mb-3" />
               <h3 className="font-semibold mb-2">Service Reports</h3>
               <p className="text-sm text-muted-foreground">Upload & manage reports</p>
             </CardContent>
           </Card>
-          
-          <Card className="hover:shadow-lg transition-all cursor-pointer">
+
+          <Card className="hover:shadow-lg transition-all cursor-pointer" onClick={() => setShowJobTrackerPopup(true)}>
             <CardContent className="p-6 text-center">
               <CheckCircle className="h-8 w-8 text-mechanic mx-auto mb-3" />
               <h3 className="font-semibold mb-2">Job Tracker</h3>
               <p className="text-sm text-muted-foreground">Update job status</p>
             </CardContent>
           </Card>
-          
-          <Card className="hover:shadow-lg transition-all cursor-pointer">
+
+          <Card className="hover:shadow-lg transition-all cursor-pointer" onClick={() => setShowAlertPopup(true)}>
             <CardContent className="p-6 text-center">
               <AlertTriangle className="h-8 w-8 text-mechanic mx-auto mb-3" />
               <h3 className="font-semibold mb-2">Alerts</h3>
@@ -259,6 +290,20 @@ export const MechanicDashboard = () => {
           </Card>
         </motion.div>
       </div>
+
+      {/* Popups */}
+      {showAssignmentPopup && (
+        <AssignmentPopup onClose={() => setShowAssignmentPopup(false)} />
+      )}
+      {showServiceReportPopup && (
+        <ServiceReportPopup onClose={() => setShowServiceReportPopup(false)} />
+      )}
+      {showJobTrackerPopup && (
+        <JobTrackerPopup onClose={() => setShowJobTrackerPopup(false)} />
+      )}
+      {showAlertPopup && (
+        <AlertPopup onClose={() => setShowAlertPopup(false)} />
+      )}
     </div>
   );
 };

@@ -1,31 +1,35 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Car, TrendingUp, DollarSign, Users, Settings, Plus } from "lucide-react";
+import { Car, TrendingUp, DollarSign, Users, Plus } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { AddVehiclePopup } from "@/components/popups/AddVehiclePopup";
 
-export const VendorDashboard = () => {
+export const ManagerDashboard = () => {
+  const [showAddVehiclePopup, setShowAddVehiclePopup] = useState(false);
+
   const stats = [
-    { label: "Total Fleet", value: "24", icon: Car, color: "vendor", trend: "+2 this month" },
-    { label: "Active Rentals", value: "18", icon: Users, color: "vendor", trend: "75% utilization" },
-    { label: "Monthly Revenue", value: "₹1,85,000", icon: DollarSign, color: "vendor", trend: "+12% vs last month" },
+    { label: "Total Fleet", value: "24", icon: Car, color: "manager", trend: "+2 this month" },
+    { label: "Active Rentals", value: "18", icon: Users, color: "manager", trend: "75% utilization" },
+    { label: "Monthly Revenue", value: "₹1,85,000", icon: DollarSign, color: "manager", trend: "+12% vs last month" },
     { label: "Average Rating", value: "4.8", icon: TrendingUp, color: "secondary", trend: "96% satisfaction" },
   ];
 
   const fleetStatus = [
     { type: "Available", count: 6, color: "bg-green-500" },
-    { type: "Rented", count: 18, color: "bg-vendor" },
+    { type: "Rented", count: 18, color: "bg-manager" },
     { type: "Maintenance", count: 0, color: "bg-orange-500" },
   ];
 
   const recentBookings = [
-    { id: 1, customer: "Priya Sharma", car: "Honda City", duration: "3 days", amount: "₹4,500", status: "Confirmed" },
-    { id: 2, customer: "Rahul Singh", car: "BMW X1", duration: "1 week", amount: "₹12,600", status: "In Progress" },
-    { id: 3, customer: "Anita Desai", car: "Maruti Swift", duration: "2 days", amount: "₹2,400", status: "Completed" },
+    { id: 1, customer: "Shounak Shelke", car: "Honda City", duration: "3 days", amount: "₹4,500", status: "Confirmed" },
+    { id: 2, customer: "Sahil Kanchan", car: "BMW X1", duration: "1 week", amount: "₹12,600", status: "In Progress" },
+    { id: 3, customer: "Shivam Bhosle", car: "Maruti Swift", duration: "2 days", amount: "₹2,400", status: "Completed" },
   ];
 
   return (
-    <div className="min-h-screen bg-background theme-vendor">
+    <div className="min-h-screen bg-background theme-manager">
       {/* Header */}
       <motion.header
         initial={{ y: -50, opacity: 0 }}
@@ -35,18 +39,14 @@ export const VendorDashboard = () => {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-montserrat font-bold text-foreground">
-              Fleet Dashboard
+              Manager Dashboard
             </h1>
             <p className="text-muted-foreground mt-1">
               Manage your vehicle fleet and track performance
             </p>
           </div>
           <div className="flex gap-3">
-            <Button variant="outline">
-              <Settings className="h-4 w-4 mr-2" />
-              Settings
-            </Button>
-            <Button className="bg-vendor hover:bg-vendor/90">
+            <Button className="bg-vendor hover:bg-vendor/90" onClick={() => setShowAddVehiclePopup(true)}>
               <Plus className="h-4 w-4 mr-2" />
               Add Vehicle
             </Button>
@@ -153,15 +153,15 @@ export const VendorDashboard = () => {
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-1">
                           <h4 className="font-semibold">{booking.customer}</h4>
-                          <Badge 
+                          <Badge
                             variant={
-                              booking.status === "Confirmed" ? "default" : 
-                              booking.status === "In Progress" ? "secondary" : 
+                              booking.status === "Confirmed" ? "default" :
+                              booking.status === "In Progress" ? "secondary" :
                               "outline"
                             }
                             className={
-                              booking.status === "Confirmed" ? "bg-vendor text-white" : 
-                              booking.status === "In Progress" ? "bg-orange-500 text-white" : 
+                              booking.status === "Confirmed" ? "bg-vendor text-white" :
+                              booking.status === "In Progress" ? "bg-orange-500 text-white" :
                               ""
                             }
                           >
@@ -198,14 +198,14 @@ export const VendorDashboard = () => {
           transition={{ delay: 0.5 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8"
         >
-          <Card className="hover:shadow-lg transition-all cursor-pointer">
+          <Card className="hover:shadow-lg transition-all cursor-pointer" onClick={() => setShowAddVehiclePopup(true)}>
             <CardContent className="p-6 text-center">
               <Plus className="h-8 w-8 text-vendor mx-auto mb-3" />
               <h3 className="font-semibold mb-2">Add New Vehicle</h3>
               <p className="text-sm text-muted-foreground">Expand your fleet</p>
             </CardContent>
           </Card>
-          
+
           <Card className="hover:shadow-lg transition-all cursor-pointer">
             <CardContent className="p-6 text-center">
               <TrendingUp className="h-8 w-8 text-vendor mx-auto mb-3" />
@@ -213,7 +213,7 @@ export const VendorDashboard = () => {
               <p className="text-sm text-muted-foreground">View detailed reports</p>
             </CardContent>
           </Card>
-          
+
           <Card className="hover:shadow-lg transition-all cursor-pointer">
             <CardContent className="p-6 text-center">
               <DollarSign className="h-8 w-8 text-vendor mx-auto mb-3" />
@@ -223,6 +223,12 @@ export const VendorDashboard = () => {
           </Card>
         </motion.div>
       </div>
+
+      {/* Popup */}
+      <AddVehiclePopup
+        isOpen={showAddVehiclePopup}
+        onClose={() => setShowAddVehiclePopup(false)}
+      />
     </div>
   );
 };

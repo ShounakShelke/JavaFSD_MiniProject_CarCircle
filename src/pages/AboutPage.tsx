@@ -39,20 +39,17 @@ const AboutPage = () => {
     {
       name: "Shounak Shelke",
       role: "Co-Founder",
-      image: "/placeholder.svg",
-      description: "Co-founder of CarCircle"
+      image: "/placeholder.svg"
     },
     {
       name: "Sahil Kanchan",
       role: "Co-Founder",
-      image: "/placeholder.svg", 
-      description: "Co-founder of CarCircle"
+      image: "/placeholder.svg"
     },
     {
       name: "Shivam Bhosle",
       role: "Co-Founder",
-      image: "/placeholder.svg",
-      description: "Co-founder of CarCircle"
+      image: "/placeholder.svg"
     }
   ];
 
@@ -74,9 +71,8 @@ const AboutPage = () => {
               About CarCircle
             </h1>
             <p className="text-xl opacity-90 max-w-3xl mx-auto">
-              We're revolutionizing the car rental industry with technology, trust, and 
-              an unwavering commitment to customer satisfaction. Join our journey towards 
-              smarter mobility solutions.
+              We're revolutionizing the car rental industry with technology, trust, and
+              an unwavering commitment to customer satisfaction.
             </p>
           </div>
         </div>
@@ -194,9 +190,6 @@ const AboutPage = () => {
                       {member.role}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">{member.description}</p>
-                  </CardContent>
                 </Card>
               </motion.div>
             ))}
